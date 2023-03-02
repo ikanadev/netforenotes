@@ -1,0 +1,13 @@
+.openapi-generator-ignore
+apis/DefaultApi.ts
+apis/index.ts
+index.ts
+models/ErrorMessage.ts
+models/Note.ts
+models/NoteBase.ts
+models/NoteCreation.ts
+models/NoteCreationAllOf.ts
+models/NoteListItem.ts
+models/NoteListItemAllOf.ts
+models/index.ts
+runtime.ts
