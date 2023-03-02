@@ -9,7 +9,7 @@ import (
 )
 
 func StartHTTPServer() {
-	port := os.Getenv("PORT")
+	port := os.Getenv("APP_PORT")
 	repo := memory.NewNotesStore()
 	server := NewHTTPServer(repo)
 	handler := openapi.NewStrictHandler(server, []openapi.StrictMiddlewareFunc{})
