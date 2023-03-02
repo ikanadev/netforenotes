@@ -1,0 +1,5 @@
+package: openapi
+generate:
+  echo-server: true
+  strict-server: true
+output: ./openapi/openapi_server.gen.go

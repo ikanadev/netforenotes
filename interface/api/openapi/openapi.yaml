@@ -1,0 +1,168 @@
+openapi: 3.0.0
+info:
+  title: Netforenotes app API docs
+  version: 1.0.0
+paths:
+  /note/{id}:
+    get:
+      description: Get a note by ID
+      operationId: getNote
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    delete:
+      description: Delete a note by ID
+      operationId: deleteNote
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Successful deletion
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /note:
+    post:
+      description: Add new note
+      operationId: addNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteCreation'
+      responses:
+        201:
+          description: Successful creation
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    put:
+      description: Update a note
+      operationId: updateNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        204:
+          description: Successful update
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /notes:
+    get:
+      description: Get notes list based on parameters
+      operationId: getNotes
+      parameters:
+        - name: sort
+          in: query
+          required: true
+          schema:
+            type: string
+            default: date
+            enum:
+              - date
+              - title
+        - name: order
+          in: query
+          required: true
+          schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+        - name: search
+          in: query
+          description: Filter notes with some search text in title or body
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoteList'
+components:
+  schemas:
+    NoteBase:
+      type: object
+      required:
+        - title
+        - created_at
+      properties:
+        title:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+    NoteListItem:
+      allOf:
+        - $ref: '#/components/schemas/NoteBase'
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+    NoteCreation:
+      allOf:
+        - $ref: '#/components/schemas/NoteBase'
+        - type: object
+          required:
+            - body
+          properties:
+            body:
+              type: string
+    Note:
+      allOf:
+        - $ref: '#/components/schemas/NoteCreation'
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+    NoteList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NoteListItem'
+    ErrorMessage:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
