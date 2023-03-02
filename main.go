@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"github.com/vmkevv/netforenotes/interface/api"
+)
 
 func main() {
-	fmt.Println("Hello world!")
+	api.StartHTTPServer()
 }
