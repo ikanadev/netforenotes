@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"codegen": "rm -rf src/lib/api; openapi-generator-cli generate -i ../api/openapi/openapi.yaml -g typescript-fetch -o ./src/lib/api",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
