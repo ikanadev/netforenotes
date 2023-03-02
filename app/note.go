@@ -8,6 +8,12 @@ import (
 	"github.com/oklog/ulid/v2"
 )
 
+var (
+	EmptyTitleErr error = errors.New("Title can not be empty")
+	EmptyBodyErr  error = errors.New("Body can not be empty")
+	TimeZeroErr   error = errors.New("Time can not be zero")
+)
+
 type Note struct {
 	id        ulid.ULID
 	title     string
@@ -48,7 +54,7 @@ func NewNote(title, body string, milliSecs int64) (Note, error) {
 		return note, err
 	}
 	if milliSecs == 0 {
-		return note, errors.New("Time can not be zero")
+		return note, TimeZeroErr
 	}
 	note.id = ulid.Make()
 	note.title = title
@@ -59,10 +65,10 @@ func NewNote(title, body string, milliSecs int64) (Note, error) {
 
 func validateTitleAndBody(title, body string) error {
 	if strings.Trim(title, " ") == "" {
-		return errors.New("Title can not be empty")
+		return EmptyTitleErr
 	}
 	if strings.Trim(body, " ") == "" {
-		return errors.New("Body can not be empty")
+		return EmptyBodyErr
 	}
 	return nil
 }
