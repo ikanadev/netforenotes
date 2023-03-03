@@ -55,7 +55,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		margin-bottom: 28px;
 		justify-content: end;
 	}
 	.flex_1 {
@@ -66,6 +65,7 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
+		margin-bottom: 10px;
 	}
 	input {
 		width: 260px;
