@@ -95,7 +95,7 @@
 			<form>
 				<input placeholder="Title..." bind:value={title} />
 				<LoadingBar isLoading={isFetching} />
-				<textarea placeholder="Content..." bind:value={body} />
+				<textarea placeholder="Content..." bind:value={body} rows={6} />
 				<div class="actions_cont">
 					{#if needSave}
 						<button class="action_btn" type="button" on:click={handleUpdate} disabled={!isFilled}>
