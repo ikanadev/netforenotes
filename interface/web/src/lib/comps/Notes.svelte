@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { blur } from 'svelte/transition';
 	import dayjs from 'dayjs';
 	import type { NoteListItem } from '$lib/api';
 
@@ -8,8 +9,8 @@
 <div class="cont">
 	<p>Found {notes.length} note{notes.length > 1 ? 's' : ''}</p>
 	<div class="items_cont">
-		{#each notes as note}
-			<div class="item_cont">
+		{#each notes as note (note.id)}
+			<div class="item_cont" in:blur out:blur>
 				<p class="item_title">{note.title}</p>
 				<p class="item_date" data-tooltip={dayjs(note.createdAt).format('lll')}>
 					{dayjs(note.createdAt).fromNow()}
