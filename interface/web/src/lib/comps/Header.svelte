@@ -29,7 +29,7 @@
 	header {
 		padding-top: 8px;
 		padding-bottom: 8px;
-		box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
 		margin-bottom: 20px;
 	}
 	.container {
