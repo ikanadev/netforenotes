@@ -56,6 +56,7 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: end;
+		margin-bottom: 12px;
 	}
 	.flex_1 {
 		flex: 1;
