@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import CloseButton from '$lib/comps/CloseButton.svelte';
 	import LoadingBar from '$lib/comps/LoadingBar.svelte';
 	import type { DefaultApi, NoteListItem, Note } from '$lib/api';
@@ -85,7 +86,7 @@
 </script>
 
 {#if note != null}
-	<div class="background">
+	<div class="background" in:fly out:fly>
 		<div class="cont">
 			<div class="close_cont">
 				<CloseButton on:click={onClose} />
