@@ -4,13 +4,15 @@
 	import type { NoteListItem } from '$lib/api';
 
 	export let notes: NoteListItem[];
+	export let onSelectNote: (note: NoteListItem) => void;
 </script>
 
 <div class="cont">
 	<p>Found {notes.length} note{notes.length > 1 ? 's' : ''}</p>
 	<div class="items_cont">
 		{#each notes as note (note.id)}
-			<div class="item_cont" in:blur out:blur>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="item_cont" in:blur out:blur on:click={() => onSelectNote(note)}>
 				<p class="item_title">{note.title}</p>
 				<p class="item_date" data-tooltip={dayjs(note.createdAt).format('lll')}>
 					{dayjs(note.createdAt).fromNow()}

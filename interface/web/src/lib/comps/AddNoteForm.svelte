@@ -67,10 +67,10 @@
 			<form in:slide out:slide on:submit={handleSubmit}>
 				<div class="title_row">
 					<!-- svelte-ignore a11y-autofocus -->
-					<input bind:value={title} tabindex={1} placeholder="Título..." autofocus />
+					<input bind:value={title} tabindex={1} placeholder="Title..." autofocus />
 					<CloseButton size={24} on:click={toggleShowForm} />
 				</div>
-				<textarea bind:value={body} tabindex={1} placeholder="Contenido..." rows="3" />
+				<textarea bind:value={body} tabindex={1} placeholder="Content..." rows="3" />
 				<Message message={errMsg} variant="error" />
 				{#if isFilled}
 					<button in:slide out:slide class="submit" type="submit" tabindex={1} disabled={isSaving}>

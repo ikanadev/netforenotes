@@ -10,6 +10,8 @@
 	import Header from '$lib/comps/Header.svelte';
 	import Notes from '$lib/comps/Notes.svelte';
 	import Message from '$lib/comps/Message.svelte';
+	import NoteModal from '$lib/comps/NoteModal.svelte';
+	import LoadingBar from '$lib/comps/LoadingBar.svelte';
 
 	dayjs.extend(relativeTime);
 	dayjs.extend(localizedFormat);
@@ -23,6 +25,14 @@
 	let notes: NoteListItem[] = [];
 	let isFetching = false;
 	let fetchController: AbortController;
+	let selectedNote: NoteListItem | null = null;
+
+	function onSelectNote(note: NoteListItem) {
+		selectedNote = note;
+	}
+	function clearSelectedNote() {
+		selectedNote = null;
+	}
 
 	function toggleOrder() {
 		if (order === GetNotesOrderEnum.Asc) {
@@ -68,47 +78,15 @@
 	<title>{APP_NAME}</title>
 </svelte:head>
 <Header />
+<NoteModal api={data.api} onClose={clearSelectedNote} note={selectedNote} {refetchNotes} />
 <AddNoteForm api={data.api} {refetchNotes} />
 <FiltersBar bind:search bind:sort {toggleOrder} {order} />
 <main class="container">
-	<div class="loader_cont">
-		{#if isFetching}
-			<div class="loader">
-				<span class="dot1" />
-			</div>
-		{/if}
-	</div>
+	<LoadingBar isLoading={isFetching} />
 	{#if notes.length === 0 && !isFetching}
 		<Message message="No notes found..." />
 	{/if}
 	{#if notes.length > 0}
-		<Notes {notes} />
+		<Notes {notes} {onSelectNote} />
 	{/if}
 </main>
-
-<style>
-	.loader_cont {
-		display: flex;
-		justify-content: center;
-		align-items: start;
-		height: 20px;
-	}
-	.loader {
-		position: relative;
-		overflow: hidden;
-		border-radius: 4px;
-		width: 100%;
-		height: 4px;
-		background: #00000010;
-	}
-	.loader span {
-		position: absolute;
-		height: 4px;
-		width: 10px;
-		border-radius: 4px;
-		background: #00000043;
-	}
-	.dot1 {
-		animation: loader_width 2s linear infinite, loader_left 2.2s linear infinite;
-	}
-</style>
