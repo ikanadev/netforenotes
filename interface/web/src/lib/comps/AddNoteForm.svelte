@@ -151,7 +151,7 @@
 	}
 	.submit:hover,
 	.submit:focus {
-		background: rgba(0, 0, 0, 0.0825);
+		background: rgba(0, 0, 0, 0.06);
 	}
 	.submit:disabled {
 		opacity: 0.6;
