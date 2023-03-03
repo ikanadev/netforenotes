@@ -6,7 +6,12 @@
 	<div class="container">
 		<h1>{APP_NAME}</h1>
 
-		<a class="source_cont" href="https://github.com/vmkevv" target="_blank" rel="noreferrer">
+		<a
+			class="source_cont"
+			href="https://github.com/vmkevv/netforenotes"
+			target="_blank"
+			rel="noreferrer"
+		>
 			<span>Source</span>
 			<svg
 				height="30px"
